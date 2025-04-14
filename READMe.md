@@ -1,8 +1,8 @@
-# Ka?iuk? svetain?
+# Kačiukų svetainę
 
-## Apra�ymas
+## Aprašymas
 
-N?ra
+Nėra
 
 ## Reikalavimai
 
@@ -11,17 +11,17 @@ N?ra
 
 ## Diegimas
 
-1. Klonuokite repozitorij?:
+1. Klonuokite repozitoriją:
    
    ````
    git clone https://github.com/mokinys98/CatWebsite.git
    ````
-2. Eikite ? projekto katalog?:
+2. Eikite į projekto katalogą:
    
    ````
    cd CatWebsite
    ````
-3. Eikite ? projekto katalog?:
+3. Įdiekite priklausomybes:
    
    ````
    npm install
