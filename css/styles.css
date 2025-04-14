@@ -1,0 +1,202 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    background-color: #333;
+    color: white;
+}
+
+.logo {
+    max-width: 33.33%;
+    padding-left: 20px;
+
+}
+
+.logo img {
+    max-width: 80px;
+    height: auto;
+}
+
+.menu {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+    padding: 10px 0;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    height: calc(100% - 80px);
+}
+
+.sidebar {
+    flex: 0 0 15%;
+    background-color: #f4f4f4;
+}
+
+.sidebar-left {
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-right {
+    border-left: 1px solid #ddd;
+}
+
+.content {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+main h1 {
+    text-align: center;
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.contact-form {
+    max-width: 100%;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    position: absolute;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 0.3rem;
+    color: #999;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 450px;
+    padding: 1rem;
+    padding-left: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.7rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #4f46e5;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label,
+textarea:focus + label,
+textarea:not(:placeholder-shown) + label {
+    top: 0.4rem;
+    font-size: 0.75rem;
+    color: #4f46e5;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4f46e5;
+    color: #fff;
+    border: none;
+    border-radius: 0.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #4338ca;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
