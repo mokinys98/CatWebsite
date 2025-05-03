@@ -196,3 +196,13 @@ textarea {
     opacity: 1;
     bottom: 50px;
 }
+
+@media (min-width: 1200px) {
+    .d-xl-flex {
+        display: flex !important;
+    }
+}
+
+.d-none {
+    display: none !important;
+}
