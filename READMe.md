@@ -6,6 +6,7 @@ Nėra
 
 ## Reikalavimai
 
+- MongoDB Community Server @ https://www.mongodb.com/try/download/community
 - Node.js
 - npm
 - Bootstrap
@@ -39,5 +40,5 @@ Nėra
 5. Paleiskite serverį:
    
    ````bash
-   node src/server.js
+   node .\src\server.js
    ````
