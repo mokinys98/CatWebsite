@@ -173,30 +173,6 @@ textarea {
     background-color: #4338ca;
 }
 
-.toast {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.5s, bottom 0.5s;
-}
-
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-    bottom: 50px;
-}
-
 @media (min-width: 1200px) {
     .d-xl-flex {
         display: flex !important;
@@ -206,3 +182,58 @@ textarea {
 .d-none {
     display: none !important;
 }
+
+/* ==== Bootstrap‑friendly toast’ai ====================== */
+
+/* 1) Konteineris – pats mažas kaip jo turinys -------------- */
+.toast-container{
+    position:fixed;
+    inset:auto 0 0 auto;          /* bottom:0; right:0; */
+    display:inline-flex;          /* shrink‑wrap width */
+    flex-direction:column-reverse;/* naujausias viršuje */
+    gap:.5rem;
+    z-index:11000;                /* virš modals (1055) */
+    pointer-events:none;          /* paspaudimai praeina kiaurai */
+    padding:1rem;                 /* atstumas nuo krašto */
+  }
+  
+  /* 2) Pačios kortelės -------------------------------------- */
+  .toast{
+    pointer-events:auto;          /* bet ant pačios kortelės – veikia */
+    background:var(--bs-dark,#333);
+    color:var(--bs-light,#fff);
+    padding:.75rem 1rem;
+    border-radius:.375rem;
+    min-width:16rem;              /* ~256 px – keisk, jei reikia */
+    max-width:24rem;              /* saugu ilgoms žinutėms */
+    position:relative;
+    opacity:0;                    /* pradžioj paslėpta */
+    transform:translateY(100%);   /* slysta iš apačios */
+    transition:opacity .3s ease,transform .3s ease;
+    box-shadow:0 0.5rem 1rem rgba(0,0,0,.15);
+    word-break:break-word;
+  }
+  
+  /* 3) „Matoma“ būsena -------------------------------------- */
+  .toast.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+  
+  /* 4) Tekstas + uždarymo mygtukas --------------------------- */
+  .toast-message{margin-right:1.75rem;}
+  .toast-close{
+    position:absolute;
+    top:.25rem;
+    right:.5rem;
+    background:transparent;
+    border:0;
+    font-size:1.25rem;
+    line-height:1;
+    color:inherit;
+    cursor:pointer;
+  }
+
+  .toast-container > *:not(:last-child) {
+    margin-bottom: 0 !important;
+  }

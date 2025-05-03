@@ -22,7 +22,7 @@ document.getElementById('contact-form')
       if (resp.ok) {
         showToast(`Ačiū už žinutę, ${data.vardas}!`);
         showToast(`Sėkmingai įrašyta, ID: ${json.insertedId}`);
-        form.reset();
+        //form.reset();
       } else {
         showToast(`Klaida: ${json.error}`);
       }

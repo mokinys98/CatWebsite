@@ -1,20 +1,52 @@
 // toast.js
-// ———— remove DOMContentLoaded wrapper ir formos listener’į, 
-//     jei formos submit’ą valdai per form.js
 
-export function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-  
-    // įjungiam animaciją
-    setTimeout(() => toast.classList.add('show'), 10);
-  
-    // po 3s išjungiam ir pašalinam
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => document.body.removeChild(toast), 500);
-    }, 3000);
+// Sukuriam/fiksuojam toast’ų konteinerį
+let container = null;
+function getContainer() {
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
   }
-  
+  return container;
+}
+
+// Pagrindinė funkcija – eksportuojame kaip ES modulį
+export function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+
+  // Teksto dalis
+  const text = document.createElement('div');
+  text.className = 'toast-message';
+  text.textContent = message;
+
+  // Uždarymo mygtukas
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'toast-close';
+  closeBtn.innerHTML = '&times;';
+  closeBtn.addEventListener('click', () => {
+    clearTimeout(timeoutId);
+    hideToast(toast);
+  });
+
+  // Sudėliojam elementus
+  toast.append(text, closeBtn);
+  getContainer().appendChild(toast);
+
+  // Rizatuojam animaciją
+  requestAnimationFrame(() => toast.classList.add('show'));
+
+  // Auto-hide po 15 s
+  const timeoutId = setTimeout(() => {
+    hideToast(toast);
+  }, 150000);
+
+  // Funkcija – paslepiam ir išimam iš DOM
+  function hideToast(el) {
+    el.classList.remove('show');
+    setTimeout(() => {
+      el.parentNode?.removeChild(el);
+    }, 300); // suderinta su CSS animacijos trukme
+  }
+}
