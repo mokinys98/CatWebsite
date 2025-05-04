@@ -62,12 +62,48 @@ async function start() {
     });
     console.log('✔️ Prijungta prie MongoDB (via mongoose)');
 
+    // po sėkmingo connect – paleidžiam testą
+    await testMongoDb();
+
     app.listen(port, () => {
       console.log(`🚀 Serveris veikia http://localhost:${port}`);
     });
   } catch (err) {
     console.error('❌ DB jungtis nepavyko:', err);
     process.exit(1);
+  }
+}
+
+//backend serveris sėkmingai prisijungtų prie MongoDB duomenų bazės ir galėtų atlikti CRUD operacijas.
+async function testMongoDb() {
+  try {
+    // pereinam prie 'config' DB
+    const configConn = mongoose.connection.useDb('config');
+
+    // sukuriam modelį 'test' kolekcijai
+    const testSchema = new mongoose.Schema({
+      _id:  { type: String, required: true },
+      test: { type: String, required: true }
+    }, {
+      collection: 'test'
+    });
+    const Test = configConn.model('Test', testSchema);
+
+    // Patikriname dokumentą su _id = '1'
+    const doc = await Test.findById('1');
+    if (!doc) {
+      console.warn('⚠️ Nerastas įrašas su _id=1');
+      return;
+    }
+
+    // Tikriname ar test laukas lygus 'test'
+    if (doc.test === 'test') {
+      console.log('✅ MongoDB CRUD testas sėkmingas!');
+    } else {
+      console.warn(`⚠️ Neatitikimas: MongoDB CRUD teste -> „test“ laukas nėra „test“, rasta: ${doc.test}`);
+    }
+  } catch (err) {
+    console.error('❌ testMongoDb klaida:', err);
   }
 }
 start();
