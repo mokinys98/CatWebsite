@@ -21,6 +21,10 @@ III Namų darbas
 - Node.js
 - npm
 - Bootstrap
+- React
+- React-dom
+- React-router-dom
+- Axios
 
 ## Diegimas
 

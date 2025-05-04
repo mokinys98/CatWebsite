@@ -1,12 +1,20 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT || 3000;
-
 const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/Svetaine';
+
+app.use(
+  cors({
+    origin: 'http://localhost:3001', // arba '*' jei norite leisti visiems
+    methods: ['GET','POST','PUT','DELETE'],
+    credentials: true,
+  })
+);
 
 // 1) Mongoose schema & model
 const formSchema = new mongoose.Schema({
@@ -36,6 +44,54 @@ app.post('/api/form', async (req, res) => {
     return res.status(201).json({ insertedId: doc._id });
   } catch (err) {
     console.error('❌ Įrašymo klaida:', err);
+    return res.status(500).json({ error: 'Serverio klaida' });
+  }
+});
+
+// 3) GET endpoint’as visiems formos duomenims
+app.get('/api/form', async (req, res) => {
+  try {
+    const docs = await Form.find({}).sort({ createdAt: -1 });
+    return res.status(200).json(docs);
+  } catch (err) {
+    console.error('❌ Skaitymo klaida:', err);
+    return res.status(500).json({ error: 'Serverio klaida' });
+  }
+});
+
+// 3) PUT endpoint’as formos duomenims atnaujinti
+app.put('/api/form/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { vardas, email, message } = req.body;
+
+    if (!vardas || !email) {
+      return res.status(400).json({ error: 'Privalomi laukai: vardas ir email' });
+    }
+
+    const doc = await Form.findByIdAndUpdate(id, { vardas, email, message }, { new: true });
+    if (!doc) {
+      return res.status(404).json({ error: 'Įrašas nerastas' });
+    }
+
+    return res.status(200).json(doc);
+  } catch (err) {
+    console.error('❌ Atnaudinimo klaida:', err);
+    return res.status(500).json({ error: 'Serverio klaida' });
+  }
+});
+
+// 3) DELETE endpoint’as formos duomenims ištrinti
+app.delete('/api/form/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const doc = await Form.findByIdAndDelete(id);
+    if (!doc) {
+      return res.status(404).json({ error: 'Įrašas nerastas' });
+    }
+    return res.status(200).json({ message: 'Įrašas ištrintas' });
+  } catch (err) {
+    console.error('❌ Ištrynimo klaida:', err);
     return res.status(500).json({ error: 'Serverio klaida' });
   }
 });
