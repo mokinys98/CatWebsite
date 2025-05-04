@@ -80,3 +80,6 @@ III Namų darbas
    ````bash
    npm run dev
    ````
+
+6. Atidarykite naršyklę ir eikite į adresą `http://localhost:3000` norėdami pasiekti Node.js Express aplikaciją.
+7. React AdminCenter atsidaryti eikite į adresą `http://localhost:3001` norėdami pasiekti aplikaciją.
