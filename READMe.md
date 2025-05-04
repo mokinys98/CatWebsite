@@ -55,5 +55,5 @@ III Namų darbas
 5. Paleiskite serverį:
    
    ````bash
-   node .\src\server.js
+   npm run dev
    ````

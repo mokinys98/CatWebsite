@@ -26,26 +26,37 @@ export default function ListItems() {
   useEffect(() => { fetchData() }, []);
 
   return (
-    <div>
+    <div className="container mt-4">
       <h2>All Entries</h2>
-      <table border="1" cellPadding="5">
-        <thead>
-          <tr><th>ID</th><th>Vardas</th><th>Email</th><th>Actions</th></tr>
-        </thead>
-        <tbody>
-          {items.map(i => (
-            <tr key={i._id}>
-              <td>{i._id}</td>
-              <td>{i.vardas}</td>
-              <td>{i.email}</td>
-              <td>
-                <Link to={`/edit/${i._id}`}>Edit</Link> | 
-                <button onClick={()=>handleDelete(i._id)}>Delete</button>
-              </td>
+      <div className="table-responsive">
+        <table className="table table-bordered table-striped">
+          <thead className="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Vardas</th>
+              <th>Email</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map(i => (
+              <tr key={i._id}>
+                <td>{i._id}</td>
+                <td>{i.vardas}</td>
+                <td>{i.email}</td>
+                <td>
+                  <Link to={`/edit/${i._id}`} className="btn btn-sm btn-primary me-2">
+                    Edit
+                  </Link>
+                  <button className="btn btn-sm btn-danger" onClick={() => handleDelete(i._id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

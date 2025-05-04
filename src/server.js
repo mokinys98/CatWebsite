@@ -16,85 +16,15 @@ app.use(
   })
 );
 
-// 1) Mongoose schema & model
-const formSchema = new mongoose.Schema({
-  vardas: { type: String, required: true },
-  email: { type: String, required: true },
-  message: { type: String },
-  createdAt: { type: Date, default: Date.now }
-},
-{
-  collection: 'Forma'   // kolekcijos pavadinimas MongoDB
-});
-const Form = mongoose.model('Form', formSchema);
+
 
 // 2) Middleware’ai – JSON & URL-encoded body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 3) POST endpoint’as formos duomenims
-app.post('/api/form', async (req, res) => {
-  try {
-    const { vardas, email, message } = req.body;
-    if (!vardas || !email) {
-      return res.status(400).json({ error: 'Privalomi laukai: vardas ir email' });
-    }
-
-    const doc = await Form.create({ vardas, email, message });
-    return res.status(201).json({ insertedId: doc._id });
-  } catch (err) {
-    console.error('❌ Įrašymo klaida:', err);
-    return res.status(500).json({ error: 'Serverio klaida' });
-  }
-});
-
-// 3) GET endpoint’as visiems formos duomenims
-app.get('/api/form', async (req, res) => {
-  try {
-    const docs = await Form.find({}).sort({ createdAt: -1 });
-    return res.status(200).json(docs);
-  } catch (err) {
-    console.error('❌ Skaitymo klaida:', err);
-    return res.status(500).json({ error: 'Serverio klaida' });
-  }
-});
-
-// 3) PUT endpoint’as formos duomenims atnaujinti
-app.put('/api/form/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { vardas, email, message } = req.body;
-
-    if (!vardas || !email) {
-      return res.status(400).json({ error: 'Privalomi laukai: vardas ir email' });
-    }
-
-    const doc = await Form.findByIdAndUpdate(id, { vardas, email, message }, { new: true });
-    if (!doc) {
-      return res.status(404).json({ error: 'Įrašas nerastas' });
-    }
-
-    return res.status(200).json(doc);
-  } catch (err) {
-    console.error('❌ Atnaudinimo klaida:', err);
-    return res.status(500).json({ error: 'Serverio klaida' });
-  }
-});
-
-// 3) DELETE endpoint’as formos duomenims ištrinti
-app.delete('/api/form/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const doc = await Form.findByIdAndDelete(id);
-    if (!doc) {
-      return res.status(404).json({ error: 'Įrašas nerastas' });
-    }
-    return res.status(200).json({ message: 'Įrašas ištrintas' });
-  } catch (err) {
-    console.error('❌ Ištrynimo klaida:', err);
-    return res.status(500).json({ error: 'Serverio klaida' });
-  }
-});
+// 3) Maršrutai
+const formRouter = require('./routes/form');
+app.use('/api/form', formRouter);
 
 // 4) Static failų servinimas ir maršrutai
 app.use(express.static(path.join(__dirname, '../')));

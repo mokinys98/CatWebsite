@@ -20,21 +20,51 @@ export default function CreateForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>New Entry</h2>
-      <div>
-        <label>Vardas:</label>
-        <input value={vardas} onChange={e=>setVardas(e.target.value)} required/>
+    <div className="container mt-4">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <form onSubmit={handleSubmit}>
+            <h2 className="mb-4">New Entry</h2>
+
+            <div className="mb-3">
+              <label htmlFor="vardas" className="form-label">Vardas</label>
+              <input
+                type="text"
+                id="vardas"
+                className="form-control"
+                value={vardas}
+                onChange={e => setVardas(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                className="form-control"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="message" className="form-label">Message</label>
+              <textarea
+                id="message"
+                className="form-control"
+                rows="4"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+              ></textarea>
+            </div>
+
+            <button type="submit" className="btn btn-primary">Create</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required/>
-      </div>
-      <div>
-        <label>Message:</label>
-        <textarea value={message} onChange={e=>setMessage(e.target.value)}/>
-      </div>
-      <button type="submit">Create</button>
-    </form>
+    </div>
   );
 }
