@@ -1,36 +1,52 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('.contact-form');
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting
+// toast.js
 
-        // Show the toast message
-        showToast("Ačiū, gavome jūsų informaciją!");
+// Sukuriam/fiksuojam toast’ų konteinerį
+let container = null;
+function getContainer() {
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  return container;
+}
 
-        // Optional: Clear form fields
-        form.reset();
-    });
+// Pagrindinė funkcija – eksportuojame kaip ES modulį
+export function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
 
-    function showToast(message) {
-        // Create a toast element
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.textContent = message;
-        document.body.appendChild(toast);
+  // Teksto dalis
+  const text = document.createElement('div');
+  text.className = 'toast-message';
+  text.textContent = message;
 
-        // Show the toast with animation
-        setTimeout(() => {
-            toast.classList.add('show');
-        }, 10);
+  // Uždarymo mygtukas
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'toast-close';
+  closeBtn.innerHTML = '&times;';
+  closeBtn.addEventListener('click', () => {
+    clearTimeout(timeoutId);
+    hideToast(toast);
+  });
 
-        // Hide the toast after 3 seconds
-        setTimeout(() => {
-            toast.classList.remove('show');
+  // Sudėliojam elementus
+  toast.append(text, closeBtn);
+  getContainer().appendChild(toast);
 
-            // Remove the toast element after hiding it
-            setTimeout(() => {
-                document.body.removeChild(toast);
-            }, 500);
-        }, 3000);
-    }
-});
+  // Rizatuojam animaciją
+  requestAnimationFrame(() => toast.classList.add('show'));
+
+  // Auto-hide po 7.5 s
+  const timeoutId = setTimeout(() => {
+    hideToast(toast);
+  }, 7500);
+
+  // Funkcija – paslepiam ir išimam iš DOM
+  function hideToast(el) {
+    el.classList.remove('show');
+    setTimeout(() => {
+      el.parentNode?.removeChild(el);
+    }, 300); // suderinta su CSS animacijos trukme
+  }
+}

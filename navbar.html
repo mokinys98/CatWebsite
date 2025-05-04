@@ -1,10 +1,48 @@
-<div class="navbar">
-    <div class="logo"><img src="SiteAssets/Logo.webp"></div>
-    <div class="menu">
-        <a href="index.html">Pagrindinis puslapis</a>
-        <a href="page1.html">Nuorodos</a>
-        <a href="page2.html">Kačių informacija</a>
-        <a href="page3.html">Kontaktine forma</a>
-        <a href="page4.html">Puslapis 4</a>
+<nav class="navbar navbar-dark bg-dark border-bottom border-body">
+    <div class="container-fluid">
+        <a class="logo navbar-brand" href="index.html">
+            <img src="SiteAssets/Logo.webp" alt="Logo" height="30">
+        </a>
+
+        <div class="d-xl-none ms-2">
+            <h1 class="text-light mb-0" style="font-family: fantasy;">Cats4Life</h1>
+        </div>
+
+        <button class="navbar-toggler d-xl-none ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav"
+            aria-controls="mobileNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="menu d-none d-xl-flex align-items-center">
+            <a class="nav-link text-light px-2" href="index.html">Pagrindinis puslapis</a>
+            <a class="nav-link text-light px-2" href="page1.html">Nuorodos</a>
+            <a class="nav-link text-light px-2" href="page2.html">Kačių informacija</a>
+            <a class="nav-link text-light px-2" href="page3.html">Kontaktine forma</a>
+            <a class="nav-link text-light px-2" href="page4.html">Globos namai</a>
+            <a class="nav-link text-light px-2" href="page5.html">Paslaugos</a>
+        </div>
+
+        <form class="d-none d-xl-flex ms-auto" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"> Search </button>
+        </form>
+
+    </div>
+</nav>
+
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileNavLabel">Meniu</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <nav class="navbar-nav">
+            <a class="nav-link text-light" href="index.html">Pagrindinis puslapis</a>
+            <a class="nav-link text-light" href="page1.html">Nuorodos</a>
+            <a class="nav-link text-light" href="page2.html">Kačių informacija</a>
+            <a class="nav-link text-light" href="page3.html">Kontaktine forma</a>
+            <a class="nav-link text-light" href="page4.html">Globos namai</a>
+            <a class="nav-link text-light" href="page5.html">Paslaugos</a>
+        </nav>
     </div>
 </div>

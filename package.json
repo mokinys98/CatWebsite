@@ -1,11 +1,35 @@
 {
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "lite-server": "^2.6.1"
   },
   "scripts": {
-    "start": "node src/server.js"
+    "server": "node src/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently -k \"npm run server\" \"npm run client\""
   },
   "dependencies": {
-    "express": "^5.1.0"
-  }
+    "axios": "^1.9.0",
+    "bootstrap": "^5.3.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.14.1"
+  },
+  "name": "svetaine",
+  "version": "1.0.0",
+  "description": "III Namų darbas",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mokinys98/CatWebsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mokinys98/CatWebsite/issues"
+  },
+  "homepage": "https://github.com/mokinys98/CatWebsite#readme"
 }
