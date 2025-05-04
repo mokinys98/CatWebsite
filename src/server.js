@@ -1,20 +1,24 @@
-// src/index.js
 require('dotenv').config();
-const express      = require('express');
-const path         = require('path');
-const { MongoClient } = require('mongodb');
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
 
-const app  = express();
+const app = express();
 const port = process.env.PORT || 3000;
 
-// 1) MongoDB prisijungimo URI
-// Sukurk .env faile (repo šaknyje):
-// MONGO_URI=mongodb://127.0.0.1:27017/Svetaine
-const uri    = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/Svetaine';
-const client = new MongoClient(uri, {});
+const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/Svetaine';
 
-// Vietoje kintamojo laikysime kolekcijos nuorodą
-let formCollection;
+// 1) Mongoose schema & model
+const formSchema = new mongoose.Schema({
+  vardas: { type: String, required: true },
+  email: { type: String, required: true },
+  message: { type: String },
+  createdAt: { type: Date, default: Date.now }
+},
+{
+  collection: 'Forma'   // kolekcijos pavadinimas MongoDB
+});
+const Form = mongoose.model('Form', formSchema);
 
 // 2) Middleware’ai – JSON & URL-encoded body parser
 app.use(express.json());
@@ -28,13 +32,8 @@ app.post('/api/form', async (req, res) => {
       return res.status(400).json({ error: 'Privalomi laukai: vardas ir email' });
     }
 
-    const result = await formCollection.insertOne({
-      vardas,
-      email,
-      message,
-      createdAt: new Date()
-    });
-    return res.status(201).json({ insertedId: result.insertedId });
+    const doc = await Form.create({ vardas, email, message });
+    return res.status(201).json({ insertedId: doc._id });
   } catch (err) {
     console.error('❌ Įrašymo klaida:', err);
     return res.status(500).json({ error: 'Serverio klaida' });
@@ -54,15 +53,14 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, '../404.html'));
 });
 
-// 5) Start Mongo + Express
+// 5) Start Mongoose + Express
 async function start() {
   try {
-    await client.connect();
-    console.log('✔️ Prijungta prie MongoDB');
-
-    // Pasirenkam DB ir kolekciją
-    const db = client.db();  // pagal URI: 'Svetaine'
-    formCollection = db.collection('Forma');
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('✔️ Prijungta prie MongoDB (via mongoose)');
 
     app.listen(port, () => {
       console.log(`🚀 Serveris veikia http://localhost:${port}`);
@@ -73,3 +71,4 @@ async function start() {
   }
 }
 start();
+

@@ -37,10 +37,10 @@ export function showToast(message) {
   // Rizatuojam animaciją
   requestAnimationFrame(() => toast.classList.add('show'));
 
-  // Auto-hide po 15 s
+  // Auto-hide po 7.5 s
   const timeoutId = setTimeout(() => {
     hideToast(toast);
-  }, 150000);
+  }, 7500);
 
   // Funkcija – paslepiam ir išimam iš DOM
   function hideToast(el) {

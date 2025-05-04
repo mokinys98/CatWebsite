@@ -2,7 +2,8 @@
 
 ## Aprašymas
 
-Nėra
+III Namų darbas
+[Duomenų bazės sukūrimas (MongoDB)](https://github.com/mokinys98/CatWebsite/blob/main/src/server.js#L11-L20)
 
 ## Reikalavimai
 
