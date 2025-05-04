@@ -3,7 +3,11 @@
 ## Aprašymas
 
 III Namų darbas
-[Duomenų bazės sukūrimas (MongoDB)](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L11-L20)
+
+- Duomenų bazės sukūrimas (MongoDB)
+  - Sukurkite MongoDB duomenų bazę -> Pati susikuria jeigu nėra pagal sukurtą kolekciją
+  - [Sukurkite kolekcijas](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L11-L20) 
+  - [Patikrinkite duomenų bazės ryšį](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L58-L63) 
 
 ## Reikalavimai
 
