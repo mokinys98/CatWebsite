@@ -11,12 +11,10 @@ const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/Svetaine';
 app.use(
   cors({
     origin: 'http://localhost:3001', // arba '*' jei norite leisti visiems
-    methods: ['GET','POST','PUT','DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
 );
-
-
 
 // 2) Middleware’ai – JSON & URL-encoded body parser
 app.use(express.json());
@@ -68,7 +66,7 @@ async function testMongoDb() {
 
     // sukuriam modelį 'test' kolekcijai
     const testSchema = new mongoose.Schema({
-      _id:  { type: String, required: true },
+      _id: { type: String, required: true },
       test: { type: String, required: true }
     }, {
       collection: 'test'
