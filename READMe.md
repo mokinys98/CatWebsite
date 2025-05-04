@@ -10,13 +10,14 @@ III Namų darbas
   - [Patikrinkite duomenų bazės ryšį](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L58-L63) 
 - Prijungimas prie tinklapio (Backend - Node.js su Express)
   - [Sukurkite backend serverį](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L2-L6) 
-  - [Užtikrinkite sėkmingą prisijungimą prie MongoDB bei CRUD operacijų veikimą](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#77-L108) 
-  - [Naudokite Mongoose, duomenų valdymui ir schemų kūrimui](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#1-L21) 
-  - [Sukurkite API maršrutus](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#27-L41) 
-  
+  - [Užtikrinkite sėkmingą prisijungimą prie MongoDB bei CRUD operacijų veikimą](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L77-L108) 
+  - [Naudokite Mongoose, duomenų valdymui ir schemų kūrimui](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L1-L21) 
+  - [Sukurkite API maršrutus](https://github.com/mokinys98/CatWebsite/blob/nd3/src/server.js#L27-L41) 
+
 ## Reikalavimai
 
 - MongoDB Community Server @ https://www.mongodb.com/try/download/community
+- mongoose
 - Node.js
 - npm
 - Bootstrap
